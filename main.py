@@ -171,6 +171,8 @@ class CategoryScore(BaseModel):
             return None
         if isinstance(v, str):
             raise ValueError(f"Expected numeric score, got string: '{v}'")
+        if not isinstance(v, (int, float)):
+            raise ValueError(f"Expected numeric score, got {type(v).__name__}")
         v = float(v)
         if not 1.0 <= v <= 5.0:
             raise ValueError(f"Score {v} is outside the valid range [1.0, 5.0]")
